@@ -25,16 +25,26 @@ $(document).ready(function () {
         destination = $("#destination-input").val().trim();
         firstTrainTime = $("#time-input").val().trim();
         frequency = $("#frequency-input").val().trim();
+
       // push to Firebase 
         dataRef.ref().push({
             
-            name: trainName,
+            trainName: trainName,
             destination: destination,
             firstTrainTime: firstTrainTime,
             frequency: frequency,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
         });
-    
+        
+        dataRef.ref().on("child_added", function(childSnapshot) {
+      
+          // Log everything that's coming out of snapshot
+          console.log(childSnapshot.val().trainName);
+          console.log(childSnapshot.val().destination);
+          console.log(childSnapshot.val().firstTrainTime);
+          console.log(childSnapshot.val().frequency);
+          
+
       });
+    });
           

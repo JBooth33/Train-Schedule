@@ -38,12 +38,29 @@ $(document).ready(function () {
         
         dataRef.ref().on("child_added", function(childSnapshot) {
       
-          // Log everything that's coming out of snapshot
-          console.log(childSnapshot.val().trainName);
-          console.log(childSnapshot.val().destination);
-          console.log(childSnapshot.val().firstTrainTime);
-          console.log(childSnapshot.val().frequency);
-          
+          //set variables to stored values
+          var trainName = childSnapshot.val().trainName;
+          var destination = childSnapshot.val().destination;
+          var firstTrainTime = childSnapshot.val().firstTrainTime;
+          var frequency = childSnapshot.val().frequency;
+          //convert time of first train to come before current time
+          var firstTimeConverted = moment(firstTrainTime, "HH:mm:").subtract(1, "years");
+          console.log(firstTimeConverted);
+          //grab the current time
+          var currentTime = moment().format("HH:mm");
+          console.log("CURRENT TIME: " + currentTime);
+          //get the difference in time between the current time and the first train
+          var timeDiff = moment().diff(moment(firstTimeConverted), "minutes");
+          console.log("Difference in Time: " + timeDiff);
+          //get the remainder 
+          var timeRemainder = timeDiff % frequency;
+          console.log(timeRemainder);
+          //subtract the remainder from the frequency to determine minutes until the next train
+          var minToNextTrain = frequency - timeRemainder;
+          console.log(minToNextTrain);
+          //add the minutes until next train to the current time to determine time next train arrives
+          var nextTrain = moment().add(minToNextTrain, "minutes").format("HH:mm");
+          console.log(nextTrain);
 
       });
     });

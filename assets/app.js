@@ -62,6 +62,14 @@ $(document).ready(function () {
           var nextTrain = moment().add(minToNextTrain, "minutes").format("HH:mm");
           console.log(nextTrain);
 
+          //add train data to table
+          $("#trainTable").append(
+            "<tr><td id='trainName'>" + trainName + "</td><td id='destination'>" + destination + "</td><td id='frequency'>" + frequency + "</td><td id='next'>" + nextTrain + "</td><td id='minsToNext'>" + minToNextTrain + "</td></tr>");
+          
+            //handle the errors
+          }, function(errorObject) {
+            console.log("Errors handled: " + errorObject.code);
+
       });
     });
           

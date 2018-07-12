@@ -4,3 +4,5 @@ The app then calculates the next arrival time along with how many minutes away t
 Multiple trains can be displayed on the train table.
 
 Train info is stored in Firebase and returned to the table.
+
+https://jbooth33.github.io/Train-Schedule/
